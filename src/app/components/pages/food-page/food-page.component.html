@@ -1,0 +1,46 @@
+<ng-container *ngIf="!food.id; else showFood">
+  <app-not-found
+    [visible]="true"
+    notFoundMessage="Food Not Found"
+    restLinkText="Back To Homepage"
+  ></app-not-found>
+</ng-container>
+<ng-template #showFood>
+  <div class="container">
+    <img [src]="food.imageUrl" [alt]="food.name" />
+    <div class="details">
+      <div class="header">
+        <span class="name">
+          {{ food.name }}
+        </span>
+        <span class="favorite {{ food.favorite ? '' : 'not' }}">
+          &#10084;
+        </span>
+      </div>
+      <div class="star-rating d-inline-block">
+        <span *ngFor="let star of food?.stars"> &#9733; </span>
+      </div>
+      <div class="origins">
+        <span *ngFor="let origin of food?.origins">
+          {{ origin }}
+        </span>
+      </div>
+      <div class="tags">
+        <a *ngFor="let tag of food?.tags" [routerLink]="['/tag/' + tag]">
+          {{ tag }}
+        </a>
+      </div>
+      <div class="cook-time">
+        <span>
+          Time to cook about <strong>{{ food.cookTime }}</strong> minutes
+        </span>
+      </div>
+      <div class="price">
+        <span>
+          {{ food.price | currency }}
+        </span>
+      </div>
+      <button (click)="addToCart()">Add To Cart</button>
+    </div>
+  </div>
+</ng-template>
