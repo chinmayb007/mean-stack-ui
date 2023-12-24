@@ -1,0 +1,6 @@
+<ng-container *ngIf="visible">
+    <div class="not-found">
+        {{notFoundMessage}}
+        <a [routerLink]="resetLinkRoute">{{restLinkText}}</a>
+    </div>
+</ng-container>

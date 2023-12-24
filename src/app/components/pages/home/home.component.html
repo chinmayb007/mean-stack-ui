@@ -1,0 +1,40 @@
+<app-search></app-search>
+<app-tags></app-tags>
+<ng-container *ngIf="!foods || !foods.length; else showFoods">
+<app-not-found [visible]="true" restLinkText="Reset Search"></app-not-found>
+</ng-container>
+<ng-template #showFoods>
+  <ul>
+    <li *ngFor="let food of foods">
+      <a [routerLink]="['/food/' + food?.id]">
+        <img [src]="food?.imageUrl" [alt]="food?.name" />
+        <div class="content">
+          <div class="name">
+            {{ food?.name }}
+          </div>
+          <span class="favorite {{ food.favorite ? '' : 'not' }}">
+            &#10084;
+          </span>
+          <div class="star-rating d-inline-block" *ngFor="let star of food?.stars">&#9733;</div>
+          <div class="product-item-footer">
+              <div class="origins">
+                  <span *ngFor="let origin of food?.origins">
+                  {{origin}}
+                  </span>
+              </div>
+  
+              <div class="cook-time">
+                  <span>⌚</span>
+                  {{food?.cookTime}}
+              </div>
+              <div class="price">
+                  <span>
+                      {{food?.price | currency}}
+                  </span>
+              </div>
+          </div>
+        </div>
+      </a>
+    </li>
+  </ul>
+</ng-template>

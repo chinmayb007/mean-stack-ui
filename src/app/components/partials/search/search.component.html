@@ -1,0 +1,11 @@
+<div class="search-bar">
+  <input
+    #s
+    type="text"
+    placeholder="Search Food Mine!"
+    (keyup.enter)="search(s.value)"
+    [value]="searchTerm"
+  />
+  <button class="reset" *ngIf="s.value.length > 0" (click)="reset()">X</button>
+  <button class="search" (click)="search(s.value)">Search</button>
+</div>
